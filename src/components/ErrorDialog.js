@@ -35,7 +35,7 @@ export default function ErrorDialog(props) {
     const classes = useStyles()
 
     return(
-        <Dialog open={props.open} dir='rtl'  classes={{ paper: classes.dialog }}>
+        <Dialog open={props.open} classes={{ paper: classes.dialog }}>
             <DialogTitle className={classes.dialogTitle}>
                 <SentimentDissatisfiedRounded className={classes.titleIcon}/>
             </DialogTitle>

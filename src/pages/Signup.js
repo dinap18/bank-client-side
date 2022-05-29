@@ -1,53 +1,55 @@
-import API                  from '../api'
-import ErrorDialog          from '../components/ErrorDialog'
-import { makeStyles }       from '@material-ui/core/styles'
-import { LockOutlined }     from '@material-ui/icons'
-import React, { useState }  from 'react'
-import { Link, Redirect, useHistory } from 'react-router-dom'
+import API from '../api'
+import ErrorDialog from '../components/ErrorDialog'
+import SuccessDialog from '../components/SuccessDialog'
+import {makeStyles} from '@material-ui/core/styles'
+import React, {useState} from 'react'
 import {
-    Avatar, Container, Grid, Button, Paper, TextField, Typography
+    Container, TextField, Typography, Grid, Button, Paper, Tabs, Tab, Select, MenuItem
 } from '@material-ui/core'
-import useToken from '../hooks/useToken'
-import useUser from '../hooks/useUser'
+import {useHistory} from 'react-router-dom'
+
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        marginTop: theme.spacing(6),
+        marginTop: theme.spacing(2),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        padding: theme.spacing(6),
-        opacity: '98%'
-    },
-    avatar: {
-        marginBottom: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main
-    },
-    form: {
-        width: '100%',
-        marginTop: theme.spacing(1)
+        padding: theme.spacing(4),
+        opacity: '100%'
     },
     submit: {
-        margin: theme.spacing(3, 0, 2)
+        marginTop: theme.spacing(3),
+    },
+    tab: {
+        minWidth: 90
     }
 }))
 
 
-export default function Login(props) {
+export default function Signup(props) {
     const classes = useStyles()
     const history = useHistory()
-    const { token } = useToken()
-    const { user } = useUser()
 
-    const [errorDialog, setErrorDialog] = useState({
+    const initialDialogState = {
         open: false,
         header: '',
         message: ''
-    })
+    }
+
+    const [errorDialog, setErrorDialog] = useState(initialDialogState)
+    const [successDialog, setSuccessDialog] = useState(initialDialogState)
 
     const [userDetails, setUserDetails] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
         username: '',
-        password: ''
+        phoneNumber: '',
+        password: '',
+        userType: "user",
+        accountBalance: 0,
+        accountCurrency: "USD",
     })
 
     const inputChanged = (key, value) => {
@@ -57,100 +59,168 @@ export default function Login(props) {
         }))
     }
 
-    const login = async () => {
+    const signup = async () => {
 
-        if(Object.values(userDetails).some(value => value === '')) {
+        if (Object.values(userDetails).some(val => val === '')) {
             return setErrorDialog({
                 open: true,
-                header: 'Something went wrong',
+                header: "Forgot Something?",
                 message: 'Please fill out all of the fields'
             })
         }
 
-        if(!(await API.userExists(userDetails.username))) {
-            return setErrorDialog({
-                open: true,
-                header: 'Something went wrong',
-                message: 'User does not exist'
-            })
-        }
+      console.log("here")
+        await API.signup({
+            ...userDetails,
+        })
 
-        try {
 
-            localStorage.clear()
-
-            const token = await API.login(userDetails)
-
-            props.setToken(token)
-
-            const user = await API.getUser(token, userDetails.email)
-
-            props.setUser(user)
-
-            const nextPage = user.userType === 'admin' ? '/admins' : '/customers'
-
-            return history.push(nextPage)
-
-        } catch(error) {
-            setErrorDialog({
-                open: true,
-                header: 'Something went wrong',
-                message: 'Details provided are not valid'
-            })
-        }
+        return setSuccessDialog({
+            open: true,
+            header: "Welcome to Chain Bucks!",
+            message: "You have successfully signed up for Chain Bucks banking services"
+        })
     }
 
-
-    if(token) {
-        const redirect = user.userType === 'admin' ? '/admins' : '/customers'
-        return <Redirect to={redirect}/>
-    }
-
-    return(
-        <Container component='main' maxWidth='xs'>
+    return (
+        <Container component='main' maxWidth='sm'>
             <ErrorDialog
                 open={errorDialog.open}
-                header={errorDialog.header}
                 error={errorDialog.message}
-                close={() => setErrorDialog({open: false, message: ''})}
+                header={errorDialog.header}
+                close={() => setErrorDialog({open: false, header: '', message: ''})}
+            />
+            <SuccessDialog
+                open={successDialog.open}
+                message={successDialog.message}
+                header={successDialog.header}
+                close={() => {
+                    setSuccessDialog({open: false, header: '', message: ''})
+                    history.push('/')
+                }}
             />
             <Paper className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlined/>
-                </Avatar>
+
                 <Typography component='h1' variant='h5' style={{
                     fontFamily: 'Heebo'
                 }}>
-                    Login to an existing account
+                    Fill out your Details
                 </Typography>
-                <form className={classes.form} dir='rtl'>
-                    <TextField
-                        variant='outlined'
-                        margin='normal'
-                        required
-                        fullWidth
-                        id='username'
-                        label='username'
-                        autoFocus
-                        name='username'
-                        value={userDetails.username}
-                        onChange={event => inputChanged('username', event.target.value)}
-                    >
-                    </TextField>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="password"
-                        type="password"
-                        id="password"
-                        value={userDetails.password}
-                        onChange={event => inputChanged('password', event.target.value)}
-                    />
+                <form className={classes.form}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={6}>
+                            <TextField
+                                variant='outlined'
+                                margin='normal'
+                                fullWidth
+                                label='First Name'
+                                autoFocus
+                                value={userDetails.firstName}
+                                onChange={event => inputChanged('firstName', event.target.value)}
+                            >
+                            </TextField>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                variant='outlined'
+                                margin='normal'
+                                fullWidth
+                                label='Last Name'
+                                autoFocus
+                                value={userDetails.lastName}
+                                onChange={event => inputChanged('lastName', event.target.value)}
+                            >
+                            </TextField>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                variant='outlined'
+                                fullWidth
+                                label='Phone Number'
+                                autoFocus
+                                value={userDetails.phoneNumber}
+                                onChange={event => inputChanged('phoneNumber', event.target.value)}
+                            >
+                            </TextField>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                variant="outlined"
+                                fullWidth
+                                name="email"
+                                label="Email"
+                                id="email"
+                                value={userDetails.email}
+                                onChange={event => inputChanged('email', event.target.value)}
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                variant="outlined"
+                                fullWidth
+                                name="username"
+                                label="Choose a Username"
+                                id="username"
+                                value={userDetails.username}
+                                onChange={event => inputChanged('username', event.target.value)}
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                variant="outlined"
+                                fullWidth
+                                name="password"
+                                label="Choose a Password"
+                                id="password"
+                                value={userDetails.password}
+                                onChange={event => inputChanged('password', event.target.value)}
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                variant="outlined"
+                                fullWidth
+                                name="accountBalance"
+                                label="How much money would you like to deposit?"
+                                type="accountBalance"
+                                id="accountBalance"
+                                value={userDetails.accountBalance}
+                                onChange={event => inputChanged('accountBalance', event.target.value)}
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Select
+                                variant="outlined"
+                                fullWidth
+                                name="accountCurrency"
+                                label="Account Currency"
+                                type="accountCurrency"
+                                id="accountCurrency"
+                                value={userDetails.accountCurrency}
+                            >
+                                <MenuItem value={"USD"} onClick={() => inputChanged('accountCurrency', 'USD')}>USD</MenuItem>
+                                <MenuItem value={"LEVCOIN"}onClick={() => inputChanged('accountCurrency', 'LEVCOIN')}>LevCoin</MenuItem>
+                            </Select>
+                        </Grid>
+
+                        <Grid item xs={12}>
+                            <Grid container justifyContent='center'>
+                                <Tabs value={userDetails.userType === 'admin' ? 1 : 0} centered>
+                                    <Tab label="I'm a User" onClick={() => inputChanged('userType', 'user')}
+                                         className={classes.tab}>
+
+                                    </Tab>
+                                    <Tab label="I'm an Admin" onClick={() => inputChanged('userType', 'admin')}
+                                         className={classes.tab}>
+
+                                    </Tab>
+
+                                </Tabs>
+                            </Grid>
+                        </Grid>
+                    </Grid>
                     <Button
-                        onClick={login}
+                        onClick={signup}
                         fullWidth
                         variant="contained"
                         color="primary"
@@ -158,15 +228,10 @@ export default function Login(props) {
                         style={{
                             fontFamily: 'Heebo'
                         }}
-                    > היכנס
+                    >
+                        Sign Up
                     </Button>
-                    <Grid container justifyContent='center'>
-                        <Grid item>
-                            <Link component={Button} to='/signup'>
-                                {"Don't have an account? signup now!"}
-                            </Link>
-                        </Grid>
-                    </Grid>
+
                 </form>
             </Paper>
         </Container>

@@ -17,10 +17,10 @@ const useStyles = makeStyles(theme => ({
     },
     dialogAction: {
         justifyContent: 'center',
-        backgroundColor: '#e3b8be'
+        backgroundColor: '#000000'
     },
     titleIcon: {
-        color: '#e3b8be',
+        color: '#000000',
         fontSize: 32
     },
     button: {
@@ -34,7 +34,7 @@ export default function SuccessDialog(props) {
     const classes = useStyles()
 
     return(
-        <Dialog open={props.open} dir='rtl'  classes={{ paper: classes.dialog }}>
+        <Dialog open={props.open} classes={{ paper: classes.dialog }}>
             <DialogTitle className={classes.dialogTitle}>
                 <SentimentSatisfiedOutlined className={classes.titleIcon}/>
             </DialogTitle>

@@ -1,5 +1,4 @@
 import axios from 'axios'
-import Geocode from "react-geocode";
 
 const Server = axios.create({
     baseURL: `http://localhost:8000/api/v1`
