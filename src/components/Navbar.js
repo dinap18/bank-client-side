@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import {AppBar, Toolbar, IconButton, Typography, Button, makeStyles, Badge, Avatar} from '@material-ui/core'
-import {FavoriteBorder, AccountCircleOutlined, ChatOutlined, BookOutlined, AttachMoney} from '@material-ui/icons'
+import {AppBar, Toolbar, IconButton, Typography, Button, makeStyles} from '@material-ui/core'
+import {AccountCircleOutlined, ChatOutlined, BookOutlined, AttachMoney} from '@material-ui/icons'
 import {useHistory} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
@@ -28,7 +28,7 @@ export default function Navbar(props) {
                                 onClick={props.showLogin}>
                         <AttachMoney/>
                     </IconButton>
-                    <Typography
+                    <Typography onClick={() => history.push('/home')}
                         variant="h6"
                         style={{
                             fontFamily: 'Helvetica',
@@ -36,7 +36,9 @@ export default function Navbar(props) {
                         }}
                     > Chain Bucks
                     </Typography>
+                    <IconButton color="inherit" onClick={() => history.push('/account')}>
                     <AccountCircleOutlined/>
+                    </IconButton>
                     <Typography style={{marginLeft: 15, color: 'whiteSmoke'}}>
                         {
                             props.user
@@ -52,11 +54,6 @@ export default function Navbar(props) {
                                 <IconButton aria-label="show 4 new mails" color="inherit"
                                             onClick={() => history.push('/chat')}>
                                     <ChatOutlined/>
-                                </IconButton>
-                                <IconButton color="inherit" onClick={() => history.push('/blog')}>
-                                    <Badge badgeContent={4} color="secondary">
-                                        <BookOutlined/>
-                                    </Badge>
                                 </IconButton>
                             </div>
                             : <div/>
