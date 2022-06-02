@@ -9,6 +9,10 @@ import Footer from './Footer'
 import AccountDetails from "../pages/AccountDetails";
 import PrivateRoute from "./PrivateRoute";
 import Chat from "../pages/Chat";
+import AdminHomePage from "../pages/AdminHomePage";
+import UserHomePage from "../pages/UserHomePage";
+import TransferMoney from "../pages/TransferMoney";
+import LoanMoney from "../pages/LoanMoney";
 
 export default function Main(props) {
 
@@ -47,6 +51,10 @@ export default function Main(props) {
                     </Route>
                     <Route exact path='/account' component={AccountDetails}/>
                     <Route exact path='/chat' component={Chat}/>
+                    <Route exact path='/admins' component={AdminHomePage}/>
+                    <Route exact path='/users' component={UserHomePage}/>
+                    <Route exact path='/transfer' component={TransferMoney}/>
+                    <Route exact path='/loan' component={LoanMoney}/>
                 </Switch>
             </Router>
             <Footer/>
