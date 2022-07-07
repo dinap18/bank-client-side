@@ -8,11 +8,11 @@ import {
 } from '@material-ui/core'
 import {useHistory} from 'react-router-dom'
 import {DesktopDatePicker} from '@mui/x-date-pickers/DesktopDatePicker';
-import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
-import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import {Stack} from "@mui/material";
 import useUser from "../hooks/useUser";
-import salary from "../images/salary.png";
+import bank from "../images/loan.png";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -32,10 +32,10 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-export default function LoanMoney(props) {
+export default function RequestLoan(props) {
     const classes = useStyles()
     const history = useHistory()
-    const {user} = useUser()
+    const { user } = useUser()
 
     const initialDialogState = {
         open: false,
@@ -47,8 +47,8 @@ export default function LoanMoney(props) {
     const [successDialog, setSuccessDialog] = useState(initialDialogState)
 
     const [userDetails, setUserDetails] = useState({
-        to: '',
-        from: user._id,
+        to: user._id,
+        from: '',
         value: '',
         date: new Date(),
     })
@@ -78,8 +78,8 @@ export default function LoanMoney(props) {
 
         return setSuccessDialog({
             open: true,
-            header: "Loan sent successfully!",
-            message: `You have successfully sent a loan to ${userDetails.to}`
+            header: "Loan Request sent successfully!",
+            message: `You have successfully requested a loan from ${userDetails.from}`
         })
     }
 
@@ -101,9 +101,9 @@ export default function LoanMoney(props) {
                 }}
             />
             <Paper className={classes.paper}>
-                <img src={salary} width="50" height="50"/>
+                <img src={bank} width="50" height="50"/>
                 <Typography component='h1' variant='h5'>
-                    Loan Money
+                    Request a Loan
                 </Typography>
                 <form className={classes.form}>
                     <Grid container spacing={2}>
@@ -112,10 +112,10 @@ export default function LoanMoney(props) {
                                 variant='outlined'
                                 margin='normal'
                                 fullWidth
-                                label='Who is receiving the money?'
+                                label='Who would you like to receive money from?'
                                 autoFocus
-                                value={userDetails.to}
-                                onChange={event => inputChanged('to', event.target.value)}
+                                value={userDetails.from}
+                                onChange={event => inputChanged('from', event.target.value)}
                             >
                             </TextField>
                         </Grid>
@@ -155,9 +155,7 @@ export default function LoanMoney(props) {
                                         label="What day should the money be loaned?"
                                         inputFormat="MM/dd/yyyy"
                                         value={userDetails.date}
-                                        onChange={event => {
-                                            inputChanged('date', event)
-                                        }}
+                                        onChange={event => {inputChanged('date', event)}}
                                         renderInput={(params) => <TextField {...params} />}
                                     />
                                 </Stack>
@@ -171,9 +169,8 @@ export default function LoanMoney(props) {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-
                     >
-                        Send Loan
+                        Send Request
                     </Button>
 
                 </form>

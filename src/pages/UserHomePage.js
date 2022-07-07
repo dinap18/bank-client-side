@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core'
 import useToken from '../hooks/useToken'
 import useUser from '../hooks/useUser'
+import man from "../images/man.png";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -50,6 +51,7 @@ export default function UserHomePage(props) {
     return(
         <Container component='main' maxWidth='xs'>
             <Paper className={classes.paper}>
+                <img src={man} width="50" height="50"/>
                 <Typography>
                     Welcome to Chain Bucks, as a user you have permission to do the following:
                 </Typography>
@@ -70,9 +72,6 @@ export default function UserHomePage(props) {
                         View banking history
                     </ListItem>
                 </List>
-                <div>
-                    <img alt="crypto image" src={"/images/bank.png"}/>
-                </div>
             </Paper>
         </Container>
     )

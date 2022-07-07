@@ -7,6 +7,7 @@ import {
     Container, TextField, Typography, Grid, Button, Paper, Tabs, Tab, Select, MenuItem
 } from '@material-ui/core'
 import {useHistory} from 'react-router-dom'
+import bank from "../images/sign-up.png";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -100,10 +101,8 @@ export default function Signup(props) {
                 }}
             />
             <Paper className={classes.paper}>
-
-                <Typography component='h1' variant='h5' style={{
-                    fontFamily: 'Heebo'
-                }}>
+                <img src={bank} width="50" height="50"/>
+                <Typography component='h1' variant='h5'>
                     Fill out your Details
                 </Typography>
                 <form className={classes.form}>
@@ -225,9 +224,6 @@ export default function Signup(props) {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-                        style={{
-                            fontFamily: 'Heebo'
-                        }}
                     >
                         Sign Up
                     </Button>

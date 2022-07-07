@@ -7,6 +7,8 @@ import {
     Container, TextField, Typography, Grid, Button, Paper, Tabs, Tab, Select, MenuItem
 } from '@material-ui/core'
 import {useHistory} from 'react-router-dom'
+import useUser from "../hooks/useUser";
+import transfer from "../images/money-transfer.png";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 export default function TransferMoney(props) {
     const classes = useStyles()
     const history = useHistory()
+    const { user } = useUser()
 
     const initialDialogState = {
         open: false,
@@ -42,7 +45,7 @@ export default function TransferMoney(props) {
 
     const [userDetails, setUserDetails] = useState({
         to: '',
-        from: '',
+        from: user._id,
         value:'',
     })
 
@@ -64,15 +67,15 @@ export default function TransferMoney(props) {
         }
 
         console.log("here")
-        await API.signup({
+        await API.transfer({
             ...userDetails,
         })
 
 
         return setSuccessDialog({
             open: true,
-            header: "Welcome to Chain Bucks!",
-            message: "You have successfully signed up for Chain Bucks banking services"
+            header: "Transfer Successful!",
+            message: `You have successfully tansfered money to ${userDetails.to}`
         })
     }
 
@@ -94,10 +97,8 @@ export default function TransferMoney(props) {
                 }}
             />
             <Paper className={classes.paper}>
-
-                <Typography component='h1' variant='h5' style={{
-                    fontFamily: 'Heebo'
-                }}>
+                <img src={transfer} width="50" height="50"/>
+                <Typography component='h1' variant='h5'>
                     Transfer Money
                 </Typography>
                 <form className={classes.form}>
@@ -109,8 +110,8 @@ export default function TransferMoney(props) {
                                 fullWidth
                                 label='Who is receiving the money?'
                                 autoFocus
-                                value={userDetails.from}
-                                onChange={event => inputChanged('from', event.target.value)}
+                                value={userDetails.to}
+                                onChange={event => inputChanged('to', event.target.value)}
                             >
                             </TextField>
                         </Grid>
@@ -149,9 +150,6 @@ export default function TransferMoney(props) {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-                        style={{
-                            fontFamily: 'Heebo'
-                        }}
                     >
                         Transfer
                     </Button>

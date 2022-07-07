@@ -16,9 +16,8 @@ export default function Chat(props) {
     const socket = io('http://localhost:8000')
 
     const [messages, setMessages] = useState([
-        'Chain Bucks',
-        'Is the best',
-        'crypto bank'
+        'We hope you enjoy our banking services and our unique currency: LevCoin',
+        'How can we help you today?'
     ])
 
     useEffect(() => {

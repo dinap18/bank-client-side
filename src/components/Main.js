@@ -13,6 +13,9 @@ import AdminHomePage from "../pages/AdminHomePage";
 import UserHomePage from "../pages/UserHomePage";
 import TransferMoney from "../pages/TransferMoney";
 import LoanMoney from "../pages/LoanMoney";
+import RequestLoan from "../pages/requestLoan";
+import Home from "../pages/Home";
+import DefaultNavbarDropdown from "./DefaultNavbarDropdown";
 
 export default function Main(props) {
 
@@ -49,12 +52,14 @@ export default function Main(props) {
                     <Route path='/signup'>
                         <Signup/>
                     </Route>
-                    <Route exact path='/account' component={AccountDetails}/>
                     <Route exact path='/chat' component={Chat}/>
                     <Route exact path='/admins' component={AdminHomePage}/>
                     <Route exact path='/users' component={UserHomePage}/>
                     <Route exact path='/transfer' component={TransferMoney}/>
                     <Route exact path='/loan' component={LoanMoney}/>
+                    <Route exact path='/requestLoan' component={RequestLoan}/>
+                    <Route exact path='/account' component={AccountDetails}/>
+                    <Route exact path='/home' component={Home}/>
                 </Switch>
             </Router>
             <Footer/>

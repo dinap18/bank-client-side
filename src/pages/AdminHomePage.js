@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core'
 import useToken from '../hooks/useToken'
 import useUser from '../hooks/useUser'
-
+import profile from '../images/profile.png'
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(6),
@@ -50,6 +50,7 @@ export default function AdminHomePage(props) {
     return(
         <Container component='main' maxWidth='xs'>
             <Paper className={classes.paper}>
+                <img src={profile} width="50" height="50"/>
            <Typography>
                Welcome to Chain Bucks, as an admin you have permission to do the following:
            </Typography>
@@ -70,9 +71,6 @@ export default function AdminHomePage(props) {
                      View banking history
                  </ListItem>
              </List>
-                <div>
-                <img alt="crypto image" src={"/images/bank.png"}/>
-                </div>
             </Paper>
         </Container>
     )

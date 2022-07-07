@@ -1,14 +1,15 @@
-import API                  from '../api'
-import ErrorDialog          from '../components/ErrorDialog'
-import { makeStyles }       from '@material-ui/core/styles'
-import { LockOutlined }     from '@material-ui/icons'
-import React, { useState }  from 'react'
-import { Link, Redirect, useHistory } from 'react-router-dom'
+import API from '../api'
+import ErrorDialog from '../components/ErrorDialog'
+import {makeStyles} from '@material-ui/core/styles'
+import {LockOutlined} from '@material-ui/icons'
+import React, {useState} from 'react'
+import {Link, Redirect, useHistory} from 'react-router-dom'
 import {
     Avatar, Container, Grid, Button, Paper, TextField, Typography
 } from '@material-ui/core'
 import useToken from '../hooks/useToken'
 import useUser from '../hooks/useUser'
+import bank from "../images/key.png";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -36,8 +37,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Login(props) {
     const classes = useStyles()
     const history = useHistory()
-    const { token } = useToken()
-    const { user } = useUser()
+    const {token} = useToken()
+    const {user} = useUser()
 
     const [errorDialog, setErrorDialog] = useState({
         open: false,
@@ -59,14 +60,13 @@ export default function Login(props) {
 
     const login = async () => {
 
-        if(Object.values(userDetails).some(value => value === '')) {
+        if (Object.values(userDetails).some(value => value === '')) {
             return setErrorDialog({
                 open: true,
                 header: 'Forgot Something?',
                 message: 'Please fill out all of the fields'
             })
         }
-
 
 
         try {
@@ -86,7 +86,7 @@ export default function Login(props) {
 
             return history.push(nextPage)
 
-        } catch(error) {
+        } catch (error) {
             console.log(error)
             setErrorDialog({
                 open: true,
@@ -97,12 +97,12 @@ export default function Login(props) {
     }
 
 
-    if(token) {
+    if (token) {
         const redirect = user.userType === 'admin' ? '/admins' : '/volunteers'
         return <Redirect to={redirect}/>
     }
 
-    return(
+    return (
         <Container component='main' maxWidth='xs'>
             <ErrorDialog
                 open={errorDialog.open}
@@ -111,9 +111,7 @@ export default function Login(props) {
                 close={() => setErrorDialog({open: false, message: ''})}
             />
             <Paper className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlined/>
-                </Avatar>
+                <img src={bank} width="50" height="50"/>
                 <Typography component='h1' variant='h5' style={{
                     fontFamily: 'BlinkMacSystemFont'
                 }}>
@@ -151,9 +149,6 @@ export default function Login(props) {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-                        style={{
-                            fontFamily: 'Heebo'
-                        }}
                     > Login
                     </Button>
                     <Grid container justifyContent='center'>

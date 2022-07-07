@@ -1,7 +1,21 @@
 import React, {useState} from 'react'
-import {AppBar, Toolbar, IconButton, Typography, Button, makeStyles} from '@material-ui/core'
+import {
+    AppBar,
+    Toolbar,
+    IconButton,
+    Typography,
+    Button,
+    makeStyles,
+    List,
+    ListItem,
+    ListItemText, Menu, MenuItem
+} from '@material-ui/core'
 import {AccountCircleOutlined, ChatOutlined, BookOutlined, AttachMoney} from '@material-ui/icons'
 import {useHistory} from 'react-router-dom'
+import bank from "../images/cryptocurrencies.png";
+import DefaultNavbarDropdown from "./DefaultNavbarDropdown";
+import AccountMenu from "./DropdownMenu";
+import CustomizedMenus from "./DropdownMenu";
 
 const useStyles = makeStyles((theme) => ({
     menuButton: {
@@ -14,6 +28,12 @@ function useForceUpdate() {
     const [value, setValue] = useState(0); // integer state
     return () => setValue(value => value + 1); // update the state to force render
 }
+const options = [
+    'Show some love to MUI',
+    'Show all notification content',
+    'Hide sensitive notification content',
+    'Hide all notification content',
+];
 
 export default function Navbar(props) {
     const classes = useStyles()
@@ -24,20 +44,18 @@ export default function Navbar(props) {
         <div>
             <AppBar position='relative'>
                 <Toolbar>
-                    <IconButton className={classes.menuButton} color="inherit" aria-label="menu"
-                                onClick={props.showLogin}>
-                        <AttachMoney/>
-                    </IconButton>
+                   <CustomizedMenus/>
+
                     <Typography onClick={() => history.push('/home')}
-                        variant="h6"
-                        style={{
-                            fontFamily: 'Helvetica',
-                            flexGrow: 1
-                        }}
+                                variant="h6"
+                                style={{
+                                    fontFamily: 'Helvetica',
+                                    flexGrow: 1
+                                }}
                     > Chain Bucks
                     </Typography>
                     <IconButton color="inherit" onClick={() => history.push('/account')}>
-                    <AccountCircleOutlined/>
+                        <AccountCircleOutlined/>
                     </IconButton>
                     <Typography style={{marginLeft: 15, color: 'whiteSmoke'}}>
                         {
