@@ -1,71 +1,76 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Dialog, Grid, Paper, TextField, Typography, IconButton } from '@material-ui/core'
-import io from 'socket.io-client'
-import useUser from '../hooks/useUser'
-import { makeStyles } from '@material-ui/core';
-import {SendRounded} from '@material-ui/icons'
+import React, { useState, useEffect } from "react";
+import queryString from 'query-string';
+import io from "socket.io-client";
+import { Redirect } from 'react-router-dom';
 
-const useStyles = makeStyles({
-    dialog: {
-        height: 400
-    }
-})
+import TextContainer from '../components/TextContainer';
+import Messages from '../components/Messages';
+import InfoBar from '../components/InfoBar';
+import Input from '../components/Input';
 
-export default function Chat(props) {
+import '../styles/Chat.css';
 
-    const socket = io('http://localhost:8000')
+let socket;
 
-    const [messages, setMessages] = useState([
-        'We hope you enjoy our banking services and our unique currency: LevCoin',
-        'How can we help you today?'
-    ])
+const Chat = ({ location }) => {
+    const [name, setName] = useState('');
+    const [room, setRoom] = useState('');
+    const [users, setUsers] = useState('');
+    const [message, setMessage] = useState('');
+    const [messages, setMessages] = useState([]);
+    const [flag, setFlag]=useState(0);
+    const ENDPOINT = 'http://localhost:8000/';
 
     useEffect(() => {
-        socket.on('Message', (data) => {
-            console.log(data);
-        })
-    })
+        const { name, room } = queryString.parse(location.search);
 
-    const classes = useStyles();
+        socket = io(ENDPOINT);
+
+        setRoom('          Chat with an admin');
+        setName('user')
+
+        socket.emit('join', { name, room }, (error) => {
+            if(error) {
+                setFlag(1);
+                alert(error);
+            }
+        });
+    }, [ENDPOINT, location.search]);
+
+    useEffect(() => {
+        socket.on('message', message => {
+            setMessages(messages => [ ...messages, message ]);
+        });
+
+        socket.on("roomData", ({ users }) => {
+            setUsers(users);
+        });
+    }, []);
+
+    const sendMessage = (event) => {
+        event.preventDefault();
+        if(message) {
+            socket.emit('sendMessage', message, () => setMessage(''));
+        }
+    }
+
+    if (flag){
+        return (
+            <Redirect to="/" />
+        )
+    }
 
     return (
-
-        <Dialog open={true}  classes={{
-            paper: classes.dialog
+        <div className="outerContainer"  style={{
+            backgroundColor: '#F4F5F7'
         }}>
-            <Paper style={{height: 400, width: 300, padding: 10, overflow: 'auto'}}>
-                <Grid container spacing={2} direction='column' style={{width: '100%'}}>
-                    {
-                        messages.map(message => (
-                            <Grid item xs={12}>
-                                <Typography>
-                                    {message}
-                                </Typography>
-                            </Grid>
-                        ))
-                    }
-                </Grid>
-            </Paper>
-            <Grid conainer>
-                <Grid item xs={9}>
-                    <TextField
-                        style={{bottom: 10, position: 'absolute'}}
-
-                        variant='outlined'
-                    ></TextField>
-                </Grid>
-
-                <Grid item xs={3}>
-                    <IconButton
-                        style={{bottom: 10, position: 'absolute',  marginBottom: 8}}
-                        color="primary"
-                        onClick={() => socket.emit('Message',{data: "hello"})}
-                    ><SendRounded/></IconButton>
-                </Grid>
-
-            </Grid>
-
-
-        </Dialog>
-    )
+            <div className="container">
+                <InfoBar room={room} />
+                <Messages messages={messages} name={name} />
+                <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
+            </div>
+        </div>
+    );
 }
+
+export default Chat;
