@@ -16,6 +16,7 @@ import LoanMoney from "../pages/LoanMoney";
 import RequestLoan from "../pages/requestLoan";
 import Home from "../pages/Home";
 import DefaultNavbarDropdown from "./DefaultNavbarDropdown";
+import ApproveRequests from "../pages/ApproveRequests";
 
 export default function Main(props) {
 
@@ -60,6 +61,7 @@ export default function Main(props) {
                     <Route exact path='/requestLoan' component={RequestLoan}/>
                     <Route exact path='/account' component={AccountDetails}/>
                     <Route exact path='/home' component={Home}/>
+                    <Route exact path='/approverequests' component={ApproveRequests}/>
                 </Switch>
             </Router>
             <Footer/>

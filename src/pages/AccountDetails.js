@@ -138,31 +138,6 @@ export default function AccountDetails(props) {
                             >
                             </TextField>
                         </Grid>
-
-                        <Grid item xs={6}>
-                            <TextField
-                                variant="outlined"
-                                fullWidth
-                                name="accountBalance"
-                                label="Account Balance"
-                                type="accountBalance"
-                                id="accountBalance"
-                                value={user.accountBalance}
-                                onChange={event => inputChanged('accountBalance', event.target.value)}
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <TextField
-                                variant="outlined"
-                                fullWidth
-                                name="accountCurrency"
-                                label="Account Currency"
-                                type="accountCurrency"
-                                id="accountCurrency"
-                                value={user.accountCurrency}
-                                onChange={event => inputChanged('accountCurrency', event.target.value)}
-                            />
-                        </Grid>
                         <Grid item xs={6}>
                             <TextField
                                 variant="outlined"
@@ -187,6 +162,31 @@ export default function AccountDetails(props) {
                                 onChange={event => inputChanged('phoneNumber', event.target.value)}
                             />
                         </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                variant="outlined"
+                                fullWidth
+                                name="accountBalance"
+                                label="Account Balance"
+                                type="accountBalance"
+                                id="accountBalance"
+                                value={user.accountBalance}
+                                onChange={event => inputChanged('accountBalance', event.target.value)}
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                variant="outlined"
+                                fullWidth
+                                name="accountCurrency"
+                                label="Account Currency"
+                                type="accountCurrency"
+                                id="accountCurrency"
+                                value={user.accountCurrency}
+                                onChange={event => inputChanged('accountCurrency', event.target.value)}
+                            />
+                        </Grid>
+
 
                     </Grid>
                     <Button

@@ -13,6 +13,7 @@ import bank from "../images/cryptocurrencies.png";
 import transfer from "../images/money-transfer.png";
 import salary from "../images/salary.png";
 import loan from "../images/loan.png";
+import approve from "../images/approve.png";
 import {useHistory} from "react-router-dom";
 const StyledMenu = withStyles({
     paper: {
@@ -67,6 +68,9 @@ export default function CustomizedMenus() {
     const handleRequestLoan = ()=>{
         history.push('/requestLoan');
     }
+    const handleApprove = ()=>{
+        history.push('/approverequests');
+    }
     return (
         <div>
             <IconButton aria-controls="customized-menu"
@@ -100,6 +104,12 @@ export default function CustomizedMenus() {
                         <img src={loan} width="25" height="25"/>
                     </ListItemIcon>
                     <ListItemText primary="Request Loan" />
+                </StyledMenuItem>
+                <StyledMenuItem onClick={handleApprove}>
+                    <ListItemIcon>
+                        <img src={approve} width="25" height="25"/>
+                    </ListItemIcon>
+                    <ListItemText primary="Approve Account Requests" />
                 </StyledMenuItem>
             </StyledMenu>
         </div>
