@@ -17,6 +17,7 @@ import RequestLoan from "../pages/requestLoan";
 import Home from "../pages/Home";
 import DefaultNavbarDropdown from "./DefaultNavbarDropdown";
 import ApproveRequests from "../pages/ApproveRequests";
+import AccountActions from "../pages/AccountActions";
 
 export default function Main(props) {
 
@@ -32,13 +33,6 @@ export default function Main(props) {
         return false
     }
 
-    const authenticateVolunteer = () => {
-        if (token && user?.userType === 'volunteer') {
-            return true
-        }
-
-        return false
-    }
 
 
     return (
@@ -61,7 +55,7 @@ export default function Main(props) {
                     <Route exact path='/requestLoan' component={RequestLoan}/>
                     <Route exact path='/account' component={AccountDetails}/>
                     <Route exact path='/home' component={Home}/>
-                    <Route exact path='/approverequests' component={ApproveRequests}/>
+                    <Route exact path='/accountactions' component={AccountActions}/>
                 </Switch>
             </Router>
             <Footer/>

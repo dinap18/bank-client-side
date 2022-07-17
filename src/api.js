@@ -1,4 +1,6 @@
 import axios from 'axios'
+import _ from "lodash";
+import {wait} from "@testing-library/user-event/dist/utils";
 
 const Server = axios.create({
     baseURL: `http://localhost:8000/api/v1`
@@ -39,9 +41,36 @@ const updateUser = async (userDetails) => {
     return data
 }
 
+const getTransfersTo = async (id) => {
+    const {data} = await Server.get(`transfer/to/${id}`)
+    return data
+}
+const getTransfersFrom = async (id) => {
+    const {data} = await Server.get(`transfer/from/${id}`)
+    return data
+}
+const getLoansTo = async (id) => {
+    const {data} = await Server.get(`loan/to/${id}`)
+    return data
+}
+const getLoansFrom = async (id) => {
+    const {data} = await Server.get(`loan/from/${id}`)
+    return data
+}
+
 
 const API = {
-     signup, login, getUser, loan, transfer, getUserById, updateUser
+    signup,
+    login,
+    getUser,
+    loan,
+    transfer,
+    getUserById,
+    updateUser,
+    getTransfersTo,
+    getTransfersFrom,
+    getLoansTo,
+    getLoansFrom
 }
 
 export default API
