@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -14,7 +14,9 @@ import transfer from "../images/money-transfer.png";
 import salary from "../images/salary.png";
 import loan from "../images/loan.png";
 import historyy from "../images/history.png";
+import exchange from "../images/exchange-rate.png"
 import {useHistory} from "react-router-dom";
+
 const StyledMenu = withStyles({
     paper: {
         border: '1px solid #d3d4d5',
@@ -58,18 +60,21 @@ export default function CustomizedMenus() {
         setAnchorEl(null);
     };
 
-    const handleTransfer = ()=>{
+    const handleTransfer = () => {
         history.push('/transfer');
     }
 
-    const handleLoan = ()=>{
+    const handleLoan = () => {
         history.push('/loan');
     }
-    const handleRequestLoan = ()=>{
+    const handleRequestLoan = () => {
         history.push('/requestLoan');
     }
-    const handleHistory = ()=>{
+    const handleHistory = () => {
         history.push('/accountactions');
+    }
+    const handleExchange = () => {
+        history.push('/exchange-rates');
     }
     return (
         <div>
@@ -91,25 +96,31 @@ export default function CustomizedMenus() {
                     <ListItemIcon>
                         <img src={transfer} width="25" height="25"/>
                     </ListItemIcon>
-                    <ListItemText primary="Transfer" />
+                    <ListItemText primary="Transfer"/>
                 </StyledMenuItem>
                 <StyledMenuItem onClick={handleLoan}>
                     <ListItemIcon>
                         <img src={salary} width="25" height="25"/>
                     </ListItemIcon>
-                    <ListItemText primary="Loan" />
+                    <ListItemText primary="Loan"/>
                 </StyledMenuItem>
                 <StyledMenuItem onClick={handleRequestLoan}>
                     <ListItemIcon>
                         <img src={loan} width="25" height="25"/>
                     </ListItemIcon>
-                    <ListItemText primary="Request Loan" />
+                    <ListItemText primary="Request Loan"/>
                 </StyledMenuItem>
                 <StyledMenuItem onClick={handleHistory}>
                     <ListItemIcon>
                         <img src={historyy} width="25" height="25"/>
                     </ListItemIcon>
-                    <ListItemText primary="Account History" />
+                    <ListItemText primary="Account History"/>
+                </StyledMenuItem>
+                <StyledMenuItem onClick={handleExchange}>
+                    <ListItemIcon>
+                        <img src={exchange} width="25" height="25"/>
+                    </ListItemIcon>
+                    <ListItemText primary="Exchange Rates"/>
                 </StyledMenuItem>
             </StyledMenu>
         </div>

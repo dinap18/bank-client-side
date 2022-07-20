@@ -18,6 +18,7 @@ import Home from "../pages/Home";
 import DefaultNavbarDropdown from "./DefaultNavbarDropdown";
 import ApproveRequests from "../pages/ApproveRequests";
 import AccountActions from "../pages/AccountActions";
+import ExchangeRates from "../pages/ExchangeRates";
 
 export default function Main(props) {
 
@@ -56,6 +57,7 @@ export default function Main(props) {
                     <Route exact path='/account' component={AccountDetails}/>
                     <Route exact path='/home' component={Home}/>
                     <Route exact path='/accountactions' component={AccountActions}/>
+                    <Route exact path='/exchange-rates' component={ExchangeRates}/>
                 </Switch>
             </Router>
             <Footer/>

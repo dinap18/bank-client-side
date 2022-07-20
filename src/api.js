@@ -58,6 +58,14 @@ const getLoansFrom = async (id) => {
     return data
 }
 
+const getDollarToLevCoin = async (id) => {
+    const {data} = await Server.get(`levcoin/value/USD`)
+    return data
+}
+const getShekelToLevCoin = async (id) => {
+    const {data} = await Server.get(`levcoin/value/ILS`)
+    return data
+}
 
 const API = {
     signup,
@@ -70,7 +78,9 @@ const API = {
     getTransfersTo,
     getTransfersFrom,
     getLoansTo,
-    getLoansFrom
+    getLoansFrom,
+    getDollarToLevCoin,
+    getShekelToLevCoin,
 }
 
 export default API

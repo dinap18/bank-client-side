@@ -9,6 +9,7 @@ import {
     CssBaseline,
     ThemeProvider,
 } from '@material-ui/core'
+import PopUpWindow from "./components/PopUpWindow";
 
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] })
 
@@ -19,6 +20,7 @@ export default function App() {
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
                 <Box display='flex' flexDirection='column'     >
+                    <PopUpWindow/>
                     <Main/>
                 </Box>
             </ThemeProvider>

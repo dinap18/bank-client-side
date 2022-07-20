@@ -28,6 +28,7 @@
     "react-dom": "^18.0.0",
     "react-emoji": "^0.5.0",
     "react-gmail": "^1.0.1",
+    "react-notifications": "^1.7.3",
     "react-router": "^6.3.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "5.0.1",

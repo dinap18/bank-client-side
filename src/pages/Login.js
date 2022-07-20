@@ -98,7 +98,7 @@ export default function Login(props) {
 
 
     if (token) {
-        const redirect = user.userType === 'admin' ? '/admins' : '/volunteers'
+        const redirect = user.userType === 'admin' ? '/admins' : '/users'
         return <Redirect to={redirect}/>
     }
 
