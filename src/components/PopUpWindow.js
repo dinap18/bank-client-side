@@ -1,47 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import io from "socket.io-client";
-import { Redirect } from 'react-router-dom';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import {Redirect} from 'react-router-dom';
 
-const createNotification = (type) => {
-    return () => {
-        switch (type) {
-            case 'info':
-                NotificationManager.info('Info message');
-                break;
-            case 'success':
-                NotificationManager.success('Success message', 'Title here');
-                break;
-            case 'warning':
-                NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
-                break;
-            case 'error':
-                NotificationManager.error('Error message', 'Click me!', 5000, () => {
-                    alert('callback');
-                });
-                break;
-        }
-    };
-}
+import addNotification, {Notifications} from 'react-push-notification';
+import useUser from "../hooks/useUser";
 
-const PopUpWindow = ({ location }) => {
-    const [flag, setFlag]=useState(false);
+const PopUpWindow = ({location}) => {
+    const { user } = useUser()
     const ENDPOINT = 'http://localhost:8000/';
     const socket = io(ENDPOINT);
 
 
     useEffect(() => {
-        socket.on('mongoStream',data=>{
-            setFlag(true);
-            createNotification('error')
-            console.log(data)
-        });
+        socket.on('mongoStream', data => {
+                if (user.userType == "admin") {
+                    addNotification({
+                        title: 'Warning',
+                        subtitle: 'Please check this out',
+                        message: `${data.fullDocument.firstName} ${data.fullDocument.lastName}'s account balance is negative`,
+                        theme: 'red',
+                        duration: 5000,
+                        closeButton: "X",
+                    })
+                }
+            }
+        )
     }, []);
 
 
-
     return (
-       <></>
+        <Notifications/>
     );
 }
 
