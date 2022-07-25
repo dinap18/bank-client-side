@@ -1,6 +1,4 @@
 import axios from 'axios'
-import _ from "lodash";
-import {wait} from "@testing-library/user-event/dist/utils";
 
 const Server = axios.create({
     baseURL: `http://localhost:8000/api/v1`
@@ -58,12 +56,25 @@ const getLoansFrom = async (id) => {
     return data
 }
 
-const getDollarToLevCoin = async (id) => {
+const getDollarToLevCoin = async () => {
     const {data} = await Server.get(`levcoin/value/USD`)
     return data
 }
-const getShekelToLevCoin = async (id) => {
+const getShekelToLevCoin = async () => {
     const {data} = await Server.get(`levcoin/value/ILS`)
+    return data
+}
+
+const getAccountsToApprove = async () => {
+    const {data} = await Server.get(`gmail`)
+    return data
+}
+const deleteEmail = async (emailId) => {
+    const {data} = await Server.delete(`gmail/${emailId}`)
+    return data
+}
+const deleteUser = async (id) => {
+    const {data} = await Server.delete(`user/${id}`)
     return data
 }
 
@@ -81,6 +92,9 @@ const API = {
     getLoansFrom,
     getDollarToLevCoin,
     getShekelToLevCoin,
+    getAccountsToApprove,
+    deleteEmail,
+    deleteUser,
 }
 
 export default API

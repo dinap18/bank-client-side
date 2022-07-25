@@ -96,8 +96,8 @@ export default function LoanTable() {
     const [data,setData] = useState([])
     const [fromData,setFromData] = useState([])
 
-    useEffect(()=>{api.getLoansTo(user._id).then(res=>setData(res));
-        api.getLoansFrom(user._id).then(res=>setFromData(res))
+    useEffect(()=>{api.getLoansTo(user.username).then(res=>setData(res));
+        api.getLoansFrom(user.username).then(res=>setFromData(res))
     },[])
 
     return (

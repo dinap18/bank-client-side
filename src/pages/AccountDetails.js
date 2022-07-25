@@ -14,6 +14,7 @@ import {Stack} from "@mui/material";
 import useUser from "../hooks/useUser";
 import useToken from "../hooks/useToken";
 import resume from "../images/resume.png";
+import Navbar from "../components/Navbar";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -36,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 export default function AccountDetails(props) {
     const classes = useStyles()
     const history = useHistory()
-    const {user} = useUser()
+    const {user,setUser} = useUser()
     const {token} = useToken()
 
     const initialDialogState = {
@@ -78,10 +79,12 @@ export default function AccountDetails(props) {
             })
         }
 
-        console.log("here")
         await API.updateUser({
             ...userDetails,
         })
+
+        setUser(userDetails)
+        window.dispatchEvent(new Event('storage'));
 
         return setSuccessDialog({
             open: true,

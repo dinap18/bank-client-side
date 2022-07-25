@@ -37,7 +37,7 @@ export default function AdminHomePage(props) {
     const classes = useStyles()
     const history = useHistory()
     const { token } = useToken()
-    const { user } = useUser()
+
 
     const [errorDialog, setErrorDialog] = useState({
         open: false,

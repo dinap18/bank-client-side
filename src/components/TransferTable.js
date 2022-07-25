@@ -32,6 +32,7 @@ function Row(props) {
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
     console.log(row)
+    console.log(typeof(row.to))
     return (
         <React.Fragment>
             <TableRow className={classes.root}>
@@ -90,8 +91,9 @@ export default function TransferTable() {
     const [data,setData] = useState([])
     const [fromData,setFromData] = useState([])
 
-    useEffect(()=>{api.getTransfersTo(user._id).then(res=>setData(res));
-        api.getTransfersFrom(user._id).then(res=>setFromData(res))
+    useEffect(()=>{api.getTransfersTo(user.username).then(res=>setData(res));
+        console.log("here",typeof(data.to))
+        api.getTransfersFrom(user.username).then(res=>setFromData(res))
     },[])
 
     return (

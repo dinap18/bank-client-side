@@ -199,6 +199,7 @@ export default function Signup(props) {
                             >
                                 <MenuItem value={"USD"} onClick={() => inputChanged('accountCurrency', 'USD')}>USD</MenuItem>
                                 <MenuItem value={"LEVCOIN"}onClick={() => inputChanged('accountCurrency', 'LEVCOIN')}>LevCoin</MenuItem>
+                                <MenuItem value={"ILS"}onClick={() => inputChanged('accountCurrency', 'ILS')}>ILS</MenuItem>
                             </Select>
                         </Grid>
 

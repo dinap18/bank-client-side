@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useReducer, useState} from 'react'
 import {
     AppBar,
     Toolbar,
@@ -16,6 +16,9 @@ import bank from "../images/cryptocurrencies.png";
 import DefaultNavbarDropdown from "./DefaultNavbarDropdown";
 import AccountMenu from "./DropdownMenu";
 import CustomizedMenus from "./DropdownMenu";
+import useUser from "../hooks/useUser";
+import useForceUpdate from 'use-force-update';
+import useUserData from "../hooks/useUserData";
 
 const useStyles = makeStyles((theme) => ({
     menuButton: {
@@ -24,27 +27,25 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-function useForceUpdate() {
-    const [value, setValue] = useState(0); // integer state
-    return () => setValue(value => value + 1); // update the state to force render
+function getProfileData() {
+    return JSON.parse(localStorage.getItem('user'));
 }
-const options = [
-    'Show some love to MUI',
-    'Show all notification content',
-    'Hide sensitive notification content',
-    'Hide all notification content',
-];
 
 export default function Navbar(props) {
     const classes = useStyles()
     const history = useHistory()
+    const user = useUserData()
+    const forceUpdate = useForceUpdate();
+
+
+
 
 
     return (
         <div>
             <AppBar position='relative'>
                 <Toolbar>
-                   <CustomizedMenus/>
+                    <CustomizedMenus/>
 
                     <Typography onClick={() => history.push('/home')}
                                 variant="h6"
@@ -59,15 +60,15 @@ export default function Navbar(props) {
                     </IconButton>
                     <Typography style={{marginLeft: 15, color: 'whiteSmoke'}}>
                         {
-                            props.user
-                                ? `${props.user.firstName} ${props.user.lastName}`
+                            user
+                                ? `${user.firstName} ${user.lastName}`
                                 : 'Not signed in'
 
                         }
                     </Typography>
 
                     {
-                        props.user ?
+                        user ?
                             <div>
                                 <IconButton aria-label="show 4 new mails" color="inherit"
                                             onClick={() => history.push('/chat')}>

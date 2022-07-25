@@ -58,6 +58,7 @@ export default function Main(props) {
                     <Route exact path='/home' component={Home}/>
                     <Route exact path='/accountactions' component={AccountActions}/>
                     <Route exact path='/exchange-rates' component={ExchangeRates}/>
+                    <Route exact path='/approve-requests' component={ApproveRequests}/>
                 </Switch>
             </Router>
             <Footer/>
