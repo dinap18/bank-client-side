@@ -1,15 +1,12 @@
-import API                  from '../api'
-import ErrorDialog          from '../components/ErrorDialog'
 import { makeStyles }       from '@material-ui/core/styles'
-import { LockOutlined }     from '@material-ui/icons'
 import React, { useState }  from 'react'
-import { Link, Redirect, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import {
-    Avatar, Container, Grid, Button, Paper, TextField, Typography, List, ListItem
+    Container,Paper, Typography, List, ListItem
 } from '@material-ui/core'
 import useToken from '../hooks/useToken'
-import useUser from '../hooks/useUser'
 import profile from '../images/profile.png'
+
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(6),

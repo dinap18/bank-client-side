@@ -1,6 +1,4 @@
 import React from 'react';
-
-
 import '../styles/TextContainer.css';
 
 const TextContainer = ({ users }) => (

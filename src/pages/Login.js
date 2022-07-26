@@ -1,11 +1,10 @@
 import API from '../api'
 import ErrorDialog from '../components/ErrorDialog'
 import {makeStyles} from '@material-ui/core/styles'
-import {LockOutlined} from '@material-ui/icons'
 import React, {useState} from 'react'
 import {Link, Redirect, useHistory} from 'react-router-dom'
 import {
-    Avatar, Container, Grid, Button, Paper, TextField, Typography
+    Container, Grid, Button, Paper, TextField, Typography
 } from '@material-ui/core'
 import useToken from '../hooks/useToken'
 import useUser from '../hooks/useUser'
@@ -58,7 +57,7 @@ export default function Login(props) {
         }))
     }
 
-    const login = async () => {
+    const login = async (e) => {
 
         if (Object.values(userDetails).some(value => value === '')) {
             return setErrorDialog({
@@ -71,6 +70,8 @@ export default function Login(props) {
 
         try {
 
+            e.preventDefault()
+
             localStorage.clear()
 
             const token = await API.login(userDetails)
@@ -81,7 +82,7 @@ export default function Login(props) {
 
             props.setUser(user)
 
-            console.log(user)
+            window.dispatchEvent(new Event('storage'));
             const nextPage = user.userType === 'admin' ? '/admins' : '/users'
 
             return history.push(nextPage)
@@ -149,6 +150,7 @@ export default function Login(props) {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        type="submit"
                     > Login
                     </Button>
                     <Grid container justifyContent='center'>

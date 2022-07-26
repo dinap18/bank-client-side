@@ -1,7 +1,5 @@
-import React, {useState, useEffect} from "react";
+import React, { useEffect} from "react";
 import io from "socket.io-client";
-import {Redirect} from 'react-router-dom';
-
 import addNotification, {Notifications} from 'react-push-notification';
 import useUser from "../hooks/useUser";
 

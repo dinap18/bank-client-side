@@ -1,26 +1,34 @@
-import API                  from '../api'
-import ErrorDialog          from '../components/ErrorDialog'
 import { makeStyles }       from '@material-ui/core/styles'
-import { LockOutlined }     from '@material-ui/icons'
 import React, { useState }  from 'react'
-import { Link, Redirect, useHistory } from 'react-router-dom'
+import {useHistory } from 'react-router-dom'
 import {
-    Avatar, Container, Grid, Button, Paper, TextField, Typography, List, ListItem
+    Container,Typography,
 } from '@material-ui/core'
-import useToken from '../hooks/useToken'
-import useUser from '../hooks/useUser'
-import man from "../images/man.png";
-import ScrollableTabsButtonForce from "../components/TabPanel";
-import ScrollableTabsButtonPrevent from "../components/TabPanel";
-import ScrollableTabsButtonAuto from "../components/TabPanel";
 import FullWidthTabs from "../components/TabPanel";
+import historyImg from "../images/history.png";
 
+
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        marginTop: theme.spacing(2),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: theme.spacing(4),
+        opacity: '100%'
+    },
+    submit: {
+        marginTop: theme.spacing(3),
+    },
+    tab: {
+        minWidth: 90
+    }
+}))
 
 
 export default function AccountActions(props) {
     const history = useHistory()
-    const { token } = useToken()
-    const { user } = useUser()
+    const classes = useStyles()
 
     const [errorDialog, setErrorDialog] = useState({
         open: false,
@@ -32,6 +40,16 @@ export default function AccountActions(props) {
 
     return(
         <Container component='main' maxWidth='xs'>
+            <br/>
+            <div style={{ display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'}}>
+                <img src={historyImg} width="50" height="50"/>
+                <Typography component='h1' variant='h5'>
+                    Account History
+                </Typography>
+            </div>
+                <br/>
               <FullWidthTabs/>
         </Container>
     )

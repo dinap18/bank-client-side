@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import queryString from 'query-string';
 import io from "socket.io-client";
 import { Redirect } from 'react-router-dom';
-
-import TextContainer from '../components/TextContainer';
 import Messages from '../components/Messages';
 import InfoBar from '../components/InfoBar';
 import Input from '../components/Input';

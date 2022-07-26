@@ -12,7 +12,9 @@ import loan from "../images/loan.png";
 import historyy from "../images/history.png";
 import exchange from "../images/exchange-rate.png"
 import judge from "../images/judge.png"
+import pay from "../images/payment-method.png"
 import {useHistory} from "react-router-dom";
+import useUserData from "../hooks/useUserData";
 
 const StyledMenu = withStyles({
     paper: {
@@ -48,6 +50,7 @@ const StyledMenuItem = withStyles((theme) => ({
 export default function CustomizedMenus() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const history = useHistory()
+    const user = useUserData()
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -69,6 +72,9 @@ export default function CustomizedMenus() {
     }
     const handleHistory = () => {
         history.push('/accountactions');
+    }
+    const handlePayBackLoan = () => {
+        history.push('/pay-back-loan');
     }
     const handleExchange = () => {
         history.push('/exchange-rates');
@@ -110,6 +116,12 @@ export default function CustomizedMenus() {
                     </ListItemIcon>
                     <ListItemText primary="Request Loan"/>
                 </StyledMenuItem>
+                <StyledMenuItem onClick={handlePayBackLoan}>
+                    <ListItemIcon>
+                        <img src={pay} width="25" height="25"/>
+                    </ListItemIcon>
+                    <ListItemText primary="Pay Back Loans"/>
+                </StyledMenuItem>
                 <StyledMenuItem onClick={handleHistory}>
                     <ListItemIcon>
                         <img src={historyy} width="25" height="25"/>
@@ -122,12 +134,14 @@ export default function CustomizedMenus() {
                     </ListItemIcon>
                     <ListItemText primary="Exchange Rates"/>
                 </StyledMenuItem>
+                { user.userType === "admin" ?
                 <StyledMenuItem onClick={handleApprove}>
                     <ListItemIcon>
                         <img src={judge} width="25" height="25"/>
                     </ListItemIcon>
                     <ListItemText primary="Approve New Users"/>
-                </StyledMenuItem>
+                </StyledMenuItem>: <></>
+                }
             </StyledMenu>
         </div>
     );

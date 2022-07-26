@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer, useState} from 'react'
+import React from 'react'
 import {
     AppBar,
     Toolbar,
@@ -6,46 +6,26 @@ import {
     Typography,
     Button,
     makeStyles,
-    List,
-    ListItem,
-    ListItemText, Menu, MenuItem
 } from '@material-ui/core'
-import {AccountCircleOutlined, ChatOutlined, BookOutlined, AttachMoney} from '@material-ui/icons'
+import {AccountCircleOutlined, ChatOutlined} from '@material-ui/icons'
 import {useHistory} from 'react-router-dom'
 import bank from "../images/cryptocurrencies.png";
-import DefaultNavbarDropdown from "./DefaultNavbarDropdown";
-import AccountMenu from "./DropdownMenu";
 import CustomizedMenus from "./DropdownMenu";
-import useUser from "../hooks/useUser";
-import useForceUpdate from 'use-force-update';
 import useUserData from "../hooks/useUserData";
 
-const useStyles = makeStyles((theme) => ({
-    menuButton: {
-        marginRight: theme.spacing(2),
-        color: theme.palette.secondary.main
-    }
-}))
-
-function getProfileData() {
-    return JSON.parse(localStorage.getItem('user'));
-}
-
 export default function Navbar(props) {
-    const classes = useStyles()
     const history = useHistory()
     const user = useUserData()
-    const forceUpdate = useForceUpdate();
-
-
-
-
 
     return (
         <div>
             <AppBar position='relative'>
                 <Toolbar>
-                    <CustomizedMenus/>
+                    {
+                        user ?
+                            <CustomizedMenus/> : <><img src={bank} height="40" width="40"/>
+                                {"   "}</>
+                    }
 
                     <Typography onClick={() => history.push('/home')}
                                 variant="h6"
@@ -77,12 +57,15 @@ export default function Navbar(props) {
                             </div>
                             : <div/>
                     }
+                    {
+                        user ?
 
-                    <Button style={{marginRignt: 20, color: 'whitesmoke'}} onClick={() => {
-                        localStorage.clear()
-                        history.push('/')
-                        window.location.reload()
-                    }}>Log out</Button>
+                            <Button style={{marginRignt: 20, color: 'whitesmoke'}} onClick={() => {
+                                localStorage.clear()
+                                history.push('/')
+                                window.location.reload()
+                            }}>Log out</Button> : ''
+                    }
                 </Toolbar>
             </AppBar>
         </div>

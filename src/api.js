@@ -77,6 +77,14 @@ const deleteUser = async (id) => {
     const {data} = await Server.delete(`user/${id}`)
     return data
 }
+const getLoanById = async (id) => {
+    const {data} = await Server.get(`loan/${id}`)
+    return data
+}
+const payBackLoan = async (loan) => {
+    const {data} = await Server.put(`loan/${loan._id}`,loan)
+    return data
+}
 
 const API = {
     signup,
@@ -95,6 +103,8 @@ const API = {
     getAccountsToApprove,
     deleteEmail,
     deleteUser,
+    getLoanById,
+    payBackLoan,
 }
 
 export default API

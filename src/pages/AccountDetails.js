@@ -4,17 +4,12 @@ import SuccessDialog from '../components/SuccessDialog'
 import {makeStyles} from '@material-ui/core/styles'
 import React, {useState} from 'react'
 import {
-    Container, TextField, Typography, Grid, Button, Paper, Tabs, Tab, Select, MenuItem
+    Container, TextField, Typography, Grid, Button, Paper
 } from '@material-ui/core'
 import {useHistory} from 'react-router-dom'
-import {DesktopDatePicker} from '@mui/x-date-pickers/DesktopDatePicker';
-import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
-import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {Stack} from "@mui/material";
 import useUser from "../hooks/useUser";
 import useToken from "../hooks/useToken";
 import resume from "../images/resume.png";
-import Navbar from "../components/Navbar";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -113,7 +108,7 @@ export default function AccountDetails(props) {
             <Paper className={classes.paper}>
                 <img src={resume} width="50" height="50"/>
                 <Typography component='h1' variant='h5'>
-                    User Details
+                    Account Details
                 </Typography>
                 <form className={classes.form}>
                     <Grid container spacing={2}>

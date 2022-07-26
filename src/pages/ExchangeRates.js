@@ -1,4 +1,3 @@
-import API from '../api'
 import {makeStyles} from '@material-ui/core/styles'
 import React, {useEffect, useState} from 'react'
 import {useHistory} from 'react-router-dom'
@@ -13,8 +12,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
 import api from "../api";
 
 const useStyles = makeStyles((theme) => ({
