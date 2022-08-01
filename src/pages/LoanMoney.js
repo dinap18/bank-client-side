@@ -48,7 +48,7 @@ export default function LoanMoney(props) {
 
     const [userDetails, setUserDetails] = useState({
         to: '',
-        from: user._id,
+        from: user.username,
         value: '',
         date: new Date(),
     })

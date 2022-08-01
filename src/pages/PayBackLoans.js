@@ -44,8 +44,6 @@ export default function PayBackLoans(props) {
 
     const handleApprove = async (row) => {
         api.getLoanById(row._id).then(async oldLoan => {
-            console.log(oldLoan)
-            console.log(row)
             if (oldLoan.payedBack !== row.payedBack) {
                 await api.payBackLoan(row).then(await api.getLoansTo(row._id)).then(res => {
                     setData(_.filter(res, x => x.payedBack < x.value && x.moneySent === true));

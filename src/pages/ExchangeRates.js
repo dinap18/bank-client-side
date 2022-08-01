@@ -72,6 +72,7 @@ export default function ExchangeRates(props) {
                         </ListItemIcon>
                         <ListItemText>Shekel to LevCoin Rate: {shekelToLevCoin}</ListItemText>
                     </ListItem>
+
                 </List>
             </Paper>
         </Container>

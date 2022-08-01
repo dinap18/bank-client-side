@@ -45,7 +45,7 @@ export default function TransferMoney(props) {
 
     const [userDetails, setUserDetails] = useState({
         to: '',
-        from: user._id,
+        from: user.username,
         value:'',
     })
 

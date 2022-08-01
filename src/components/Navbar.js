@@ -7,9 +7,10 @@ import {
     Button,
     makeStyles,
 } from '@material-ui/core'
-import {AccountCircleOutlined, ChatOutlined} from '@material-ui/icons'
 import {useHistory} from 'react-router-dom'
 import bank from "../images/cryptocurrencies.png";
+import chat from "../images/chat.png";
+import userr from "../images/user-profile.png";
 import CustomizedMenus from "./DropdownMenu";
 import useUserData from "../hooks/useUserData";
 
@@ -36,7 +37,7 @@ export default function Navbar(props) {
                     > Chain Bucks
                     </Typography>
                     <IconButton color="inherit" onClick={() => history.push('/account')}>
-                        <AccountCircleOutlined/>
+                        <img src={userr} width="30" height="30"/>
                     </IconButton>
                     <Typography style={{marginLeft: 15, color: 'whiteSmoke'}}>
                         {
@@ -52,7 +53,7 @@ export default function Navbar(props) {
                             <div>
                                 <IconButton aria-label="show 4 new mails" color="inherit"
                                             onClick={() => history.push('/chat')}>
-                                    <ChatOutlined/>
+                                   <img src={chat} width="30" height="30"/>
                                 </IconButton>
                             </div>
                             : <div/>

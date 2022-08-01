@@ -64,6 +64,14 @@ const getShekelToLevCoin = async () => {
     const {data} = await Server.get(`levcoin/value/ILS`)
     return data
 }
+const getDollarToShekel = async () => {
+    const {data} = await Server.get(`levcoin/dollar-to-shekel`)
+    return data
+}
+const getShekelToDollar = async () => {
+    const {data} = await Server.get(`levcoin/shekel-to-dollar`)
+    return data
+}
 
 const getAccountsToApprove = async () => {
     const {data} = await Server.get(`gmail`)
@@ -105,6 +113,8 @@ const API = {
     deleteUser,
     getLoanById,
     payBackLoan,
+    getDollarToShekel,
+    getShekelToDollar,
 }
 
 export default API

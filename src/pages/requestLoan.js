@@ -47,7 +47,7 @@ export default function RequestLoan(props) {
     const [successDialog, setSuccessDialog] = useState(initialDialogState)
 
     const [userDetails, setUserDetails] = useState({
-        to: user._id,
+        to: user.username,
         from: '',
         value: '',
         date: new Date(),
