@@ -144,6 +144,8 @@ export default function RequestLoan(props) {
                             >
                                 <MenuItem value={"USD"}
                                           onClick={() => inputChanged('accountCurrency', 'USD')}>USD</MenuItem>
+                                <MenuItem value={"ILS"}
+                                          onClick={() => inputChanged('accountCurrency', 'ILS')}>ILS</MenuItem>
                                 <MenuItem value={"LEVCOIN"}
                                           onClick={() => inputChanged('accountCurrency', 'LEVCOIN')}>LevCoin</MenuItem>
                             </Select>

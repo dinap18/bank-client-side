@@ -36,8 +36,6 @@ export default function AccountActions(props) {
         message: ''
     })
 
-    let image = require("../images/bank.png")
-
     return(
         <Container component='main' maxWidth='xs'>
             <br/>

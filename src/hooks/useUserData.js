@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+// update in real time
 function getProfileData() {
     return JSON.parse(localStorage.getItem('user'));
 }

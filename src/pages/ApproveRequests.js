@@ -34,6 +34,7 @@ export default function ApproveRequests(props) {
     const classes = useStyles()
     const [data, setData] = useState([])
 
+    // request the unread mails from the server
     useEffect(() => {
         api.getAccountsToApprove().then(res => {
             setData(res);

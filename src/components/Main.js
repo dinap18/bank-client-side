@@ -21,10 +21,12 @@ import PayBackLoans from "../pages/PayBackLoans";
 
 export default function Main(props) {
 
-    const {token, setToken} = useToken()
-    const {user, setUser} = useUser()
+    const {token, setToken} = useToken() // identification success
+    const {user, setUser} = useUser()    // details of the user
 
 
+
+// verifier a quelles pages il donne access
     const isAdmin = () => {
         if(token && user?.userType === 'admin') {
             return true

@@ -154,7 +154,7 @@ export default function AccountDetails(props) {
                                 fullWidth
                                 name="phoneNumber"
                                 label="Phone Number"
-                                type="phoneNumber"
+                                inputProps={{maxLength: 10}}
                                 id="phoneNumber"
                                 value={userDetails.phoneNumber}
                                 onChange={event => inputChanged('phoneNumber', event.target.value)}

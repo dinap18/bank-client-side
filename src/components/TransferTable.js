@@ -41,6 +41,7 @@ function Row(props) {
                 </TableCell>
                 <TableCell component="th" scope="row">
                     {props.name}
+
                 </TableCell>
             </TableRow>
             <TableRow>

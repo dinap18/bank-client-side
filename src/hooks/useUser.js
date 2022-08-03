@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+// get the details of the user from the local storage - client
 export default function useUser() {
 
     const getUser = () => {

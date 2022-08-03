@@ -9,6 +9,7 @@ import {
 import {useHistory} from 'react-router-dom'
 import useUser from "../hooks/useUser";
 import transfer from "../images/money-transfer.png";
+import useUserData from "../hooks/useUserData";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 export default function TransferMoney(props) {
     const classes = useStyles()
     const history = useHistory()
-    const { user } = useUser()
+    const user  = useUserData()
 
     const initialDialogState = {
         open: false,
@@ -70,7 +71,7 @@ export default function TransferMoney(props) {
         await API.transfer({
             ...userDetails,
         })
-
+        window.dispatchEvent(new Event('storage'));
 
         return setSuccessDialog({
             open: true,
@@ -100,6 +101,10 @@ export default function TransferMoney(props) {
                 <img src={transfer} width="50" height="50"/>
                 <Typography component='h1' variant='h5'>
                     Transfer Money
+                </Typography>
+                <br/>
+                <Typography>
+                   Current Account Balance: {user.accountBalance} {user.accountCurrency}
                 </Typography>
                 <form className={classes.form}>
                     <Grid container spacing={2}>
@@ -138,8 +143,12 @@ export default function TransferMoney(props) {
                                 id="accountCurrency"
                                 value={userDetails.accountCurrency}
                             >
-                                <MenuItem value={"USD"} onClick={() => inputChanged('accountCurrency', 'USD')}>USD</MenuItem>
-                                <MenuItem value={"LEVCOIN"}onClick={() => inputChanged('accountCurrency', 'LEVCOIN')}>LevCoin</MenuItem>
+                                <MenuItem value={"USD"}
+                                          onClick={() => inputChanged('accountCurrency', 'USD')}>USD</MenuItem>
+                                <MenuItem value={"ILS"}
+                                          onClick={() => inputChanged('accountCurrency', 'ILS')}>ILS</MenuItem>
+                                <MenuItem value={"LEVCOIN"}
+                                          onClick={() => inputChanged('accountCurrency', 'LEVCOIN')}>LevCoin</MenuItem>
                             </Select>
                         </Grid>
 

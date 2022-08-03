@@ -96,6 +96,7 @@ export default function LoanTable() {
     const [data, setData] = useState([])
     const [fromData, setFromData] = useState([])
 
+    // call to the server (api - axios: can do request http)
     useEffect(() => {
         api.getLoansTo(user.username).then(res => setData(res));
         api.getLoansFrom(user.username).then(res => setFromData(res))

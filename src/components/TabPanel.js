@@ -10,6 +10,8 @@ import Box from '@material-ui/core/Box';
 import TransferTable from "./TransferTable";
 import LoanTable from "./LoanTable";
 
+
+// for account history - title of transfer and lan
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 

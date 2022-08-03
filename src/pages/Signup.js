@@ -53,6 +53,7 @@ export default function Signup(props) {
         accountCurrency: "USD",
     })
 
+    // update line so update the details local
     const inputChanged = (key, value) => {
         setUserDetails(state => ({
             ...state,
@@ -70,7 +71,7 @@ export default function Signup(props) {
             })
         }
 
-      console.log("here")
+        console.log("here")
         await API.signup({
             ...userDetails,
         })
@@ -137,6 +138,7 @@ export default function Signup(props) {
                                 fullWidth
                                 label='Phone Number'
                                 autoFocus
+                                inputProps={{maxLength: 10}}
                                 value={userDetails.phoneNumber}
                                 onChange={event => inputChanged('phoneNumber', event.target.value)}
                             >
@@ -197,9 +199,12 @@ export default function Signup(props) {
                                 id="accountCurrency"
                                 value={userDetails.accountCurrency}
                             >
-                                <MenuItem value={"USD"} onClick={() => inputChanged('accountCurrency', 'USD')}>USD</MenuItem>
-                                <MenuItem value={"LEVCOIN"}onClick={() => inputChanged('accountCurrency', 'LEVCOIN')}>LevCoin</MenuItem>
-                                <MenuItem value={"ILS"}onClick={() => inputChanged('accountCurrency', 'ILS')}>ILS</MenuItem>
+                                <MenuItem value={"USD"}
+                                          onClick={() => inputChanged('accountCurrency', 'USD')}>USD</MenuItem>
+                                <MenuItem value={"LEVCOIN"}
+                                          onClick={() => inputChanged('accountCurrency', 'LEVCOIN')}>LevCoin</MenuItem>
+                                <MenuItem value={"ILS"}
+                                          onClick={() => inputChanged('accountCurrency', 'ILS')}>ILS</MenuItem>
                             </Select>
                         </Grid>
 

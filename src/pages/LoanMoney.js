@@ -60,6 +60,7 @@ export default function LoanMoney(props) {
         }))
     }
 
+    // call to axios that are asynchroni too
     const signup = async () => {
 
         if (Object.values(userDetails).some(val => val === '')) {
@@ -144,6 +145,8 @@ export default function LoanMoney(props) {
                             >
                                 <MenuItem value={"USD"}
                                           onClick={() => inputChanged('accountCurrency', 'USD')}>USD</MenuItem>
+                                <MenuItem value={"ILS"}
+                                          onClick={() => inputChanged('accountCurrency', 'ILS')}>ILS</MenuItem>
                                 <MenuItem value={"LEVCOIN"}
                                           onClick={() => inputChanged('accountCurrency', 'LEVCOIN')}>LevCoin</MenuItem>
                             </Select>

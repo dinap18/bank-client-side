@@ -35,6 +35,7 @@ const Chat = ({ location }) => {
         });
     }, [ENDPOINT, location.search]);
 
+    // 3 messages from start
     useEffect(() => {
         socket.on('message', message => {
             setMessages(messages => [ ...messages, message ]);
@@ -60,9 +61,10 @@ const Chat = ({ location }) => {
 
     return (
         <div className="outerContainer"  style={{
-            backgroundColor: '#F4F5F7'
+            backgroundColor: '#F4F5F7' ,
+            maxWidth: 'xl'
         }}>
-            <div className="container">
+            <div className="container" >
                 <InfoBar room={room} />
                 <Messages messages={messages} name={name} />
                 <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />

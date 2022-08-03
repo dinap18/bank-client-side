@@ -27,23 +27,40 @@ export default function Navbar(props) {
                             <CustomizedMenus/> : <><img src={bank} height="40" width="40"/>
                                 {"   "}</>
                     }
+                    {
+                        user ?
 
-                    <Typography onClick={() => history.push('/home')}
-                                variant="h6"
-                                style={{
-                                    fontFamily: 'Helvetica',
-                                    flexGrow: 1
-                                }}
-                    > Chain Bucks
-                    </Typography>
-                    <IconButton color="inherit" onClick={() => history.push('/account')}>
-                        <img src={userr} width="30" height="30"/>
-                    </IconButton>
-                    <Typography style={{marginLeft: 15, color: 'whiteSmoke'}}>
+                            <Typography onClick={() => history.push('/home')}
+                                        variant="h6"
+                                        style={{
+                                            fontFamily: 'Helvetica',
+                                            flexGrow: 1
+                                        }}
+                            > Chain Bucks
+                            </Typography> :
+                            <Typography
+                        variant="h6"
+                        style={{
+                        fontFamily: 'Helvetica',
+                        flexGrow: 1
+                    }}
+                        > Chain Bucks
+                        </Typography>
+                    }
+                    {
+                        user ? // check if its connected
+                            <>
+                                <IconButton color="inherit" onClick={() => history.push('/account')}>
+                                    <img src={userr} width="25" height="25"/>
+                                </IconButton>
+                            </>
+                            : <></>
+                    }
+                    <Typography style={{ color: 'whiteSmoke'}}>
                         {
                             user
                                 ? `${user.firstName} ${user.lastName}`
-                                : 'Not signed in'
+                                : 'Not signed in' // si pas connecter alors n'affiche pas car n'existe pas
 
                         }
                     </Typography>
@@ -53,7 +70,7 @@ export default function Navbar(props) {
                             <div>
                                 <IconButton aria-label="show 4 new mails" color="inherit"
                                             onClick={() => history.push('/chat')}>
-                                   <img src={chat} width="30" height="30"/>
+                                    <img src={chat} width="25" height="25"/>
                                 </IconButton>
                             </div>
                             : <div/>
