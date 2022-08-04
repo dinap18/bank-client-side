@@ -14,6 +14,8 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import useUser from "../hooks/useUser";
 import api from "../api";
+import {MenuItem, Select} from "@material-ui/core";
+import moment from "moment";
 
 const _ = require("lodash");
 
@@ -28,9 +30,11 @@ const useRowStyles = makeStyles({
 
 function Row(props) {
     const {row} = props;
+    const [shownData,setShownData] = useState(row)
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
     console.log(row)
+    const currentDate = moment();
     return (
         <React.Fragment>
             <TableRow className={classes.root}>
@@ -40,7 +44,9 @@ function Row(props) {
                     </IconButton>
                 </TableCell>
                 <TableCell component="th" scope="row">
+                    <>
                     {props.name}
+                    </>
                 </TableCell>
             </TableRow>
             <TableRow>
@@ -50,6 +56,20 @@ function Row(props) {
                             <Typography variant="h6" gutterBottom component="div">
                                 Loan Details
                             </Typography>
+                            <Select
+                                variant="outlined"
+                                fullWidth
+                                defaultValue={"All"}
+                            >
+                                <MenuItem value={"All"} onClick={()=>{setShownData(row)}}
+                                >All</MenuItem>
+                                <MenuItem value={"Last Week"} onClick={()=>{setShownData(_.filter(row,x=>moment(x.date).isSame(currentDate, 'week')))}}
+                                >Last Week</MenuItem>
+                                <MenuItem value={"Last Month"} onClick={()=>{setShownData(_.filter(row,x=>moment(x.date).isSame(currentDate, 'month')))}}
+                                >Last Month</MenuItem>
+                                <MenuItem value={"Last Year"} onClick={()=>{setShownData(_.filter(row,x=>moment(x.date).isSame(currentDate, 'year')))}}
+                                >Last Year</MenuItem>
+                            </Select>
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
                                     <TableRow>
@@ -65,7 +85,7 @@ function Row(props) {
                                     {_.map(row, historyRow => (
                                         <TableRow key={historyRow.date}>
                                             <TableCell component="th" scope="row">
-                                                {Date(historyRow.date)}
+                                                {(new Date(historyRow.date)).toDateString()}
                                             </TableCell>
                                             <TableCell>{historyRow.to}</TableCell>
                                             <TableCell align="left">{historyRow.from}</TableCell>

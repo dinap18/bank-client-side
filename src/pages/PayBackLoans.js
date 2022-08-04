@@ -74,7 +74,7 @@ export default function PayBackLoans(props) {
                     <TableBody>
                         {_.map(data, row => (
                             <TableRow>
-                                <TableCell align="left">{Date(row.date)}</TableCell>
+                                <TableCell align="left">{(new Date(row.date)).toDateString()}</TableCell>
                                 <TableCell align="left">{row.from}</TableCell>
                                 <TableCell align="left">{row.value}</TableCell>
                                 <TableCell align="left">{row.payedBack}</TableCell>

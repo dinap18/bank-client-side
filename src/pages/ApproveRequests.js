@@ -82,7 +82,7 @@ export default function ApproveRequests(props) {
                     <TableBody>
                         {_.map(data, row => (
                             <TableRow>
-                                <TableCell align="left">{row.date}</TableCell>
+                                <TableCell align="left">{(new Date(row.date)).toDateString()}</TableCell>
                                 <TableCell align="left">{row.user.firstName} {row.user.lastName}</TableCell>
                                 <TableCell align="left">{row.user.email}</TableCell>
                                 <TableCell align="left">
